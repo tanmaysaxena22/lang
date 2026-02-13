@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+/* If you need to add custom colors or fonts, you do it here now: */
+@theme {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
