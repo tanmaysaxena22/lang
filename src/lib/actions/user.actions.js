@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache";
 
 /**
  * Fetches user from DB by Clerk ID
+ */
 
 export async function getUserById(userId) {
   try {
