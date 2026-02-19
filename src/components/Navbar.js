@@ -1,7 +1,6 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-// 1. Import Clerk components
 import { UserButton, SignedIn, SignedOut } from "@clerk/nextjs";
 
 export default function Navbar() {
@@ -18,9 +17,9 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20 items-center">
           
-          {/* LOGO SECTION */}
+          {/* LOGO */}
           <div className="flex-shrink-0">
-            <Link href="/" className="group flex items-center gap-2">
+            <Link href="/" prefetch={false} className="group flex items-center gap-2">
               <div className="bg-orange-500 p-2 rounded-xl group-hover:rotate-12 transition-transform duration-300 shadow-[0_0_15px_rgba(249,115,22,0.4)]">
                 <span className="text-black font-black text-xl">L</span>
               </div>
@@ -30,12 +29,13 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* DESKTOP NAVIGATION */}
+          {/* DESKTOP NAV */}
           <div className="hidden md:flex items-center space-x-10">
             {navLinks.map((link) => (
               <Link 
                 key={link.name} 
-                href={link.href} 
+                href={link.href}
+                prefetch={false}
                 className="text-sm font-bold text-gray-400 hover:text-orange-500 transition-colors uppercase tracking-widest"
               >
                 {link.name}
@@ -43,23 +43,21 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* DESKTOP ACTIONS - MODIFIED FOR AUTH */}
+          {/* DESKTOP AUTH */}
           <div className="hidden md:flex items-center space-x-6">
-            {/* ONLY SHOW IF LOGGED OUT */}
             <SignedOut>
-              <Link href="/sign-in" className="text-sm font-bold text-gray-300 hover:text-white transition-all">
+              <Link href="/sign-in" prefetch={false} className="text-sm font-bold text-gray-300 hover:text-white transition-all">
                 Sign In
               </Link>
-              <Link href="/sign-up">
+              <Link href="/sign-up" prefetch={false}>
                 <button className="bg-orange-500 hover:bg-orange-600 text-black text-sm font-black py-3 px-8 rounded-full transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(249,115,22,0.3)]">
                   TRY FREE
                 </button>
               </Link>
             </SignedOut>
 
-            {/* ONLY SHOW IF LOGGED IN */}
             <SignedIn>
-              <Link href="/dashboard" className="text-sm font-bold text-gray-300 hover:text-orange-500 transition-all mr-2">
+              <Link href="/dashboard" prefetch={false} className="text-sm font-bold text-gray-300 hover:text-orange-500 transition-all mr-2">
                 Dashboard
               </Link>
               <UserButton 
@@ -73,7 +71,7 @@ export default function Navbar() {
             </SignedIn>
           </div>
 
-          {/* MOBILE MENU BUTTON */}
+          {/* MOBILE BUTTON */}
           <div className="md:hidden flex items-center">
             <button 
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -91,7 +89,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* MOBILE MENU PANEL */}
+      {/* MOBILE MENU */}
       {isMenuOpen && (
         <div className="md:hidden bg-neutral-950 border-b border-orange-500/20 animate-in slide-in-from-top duration-300">
           <div className="px-4 pt-4 pb-8 space-y-4">
@@ -99,19 +97,20 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
+                prefetch={false}
                 onClick={() => setIsMenuOpen(false)}
                 className="block text-xl font-bold text-gray-300 px-4 py-2 hover:text-orange-500"
               >
                 {link.name}
               </Link>
             ))}
+
             <div className="pt-4 border-t border-white/5 space-y-4 px-4">
-              {/* MOBILE AUTH LOGIC */}
               <SignedOut>
-                <Link href="/sign-in" onClick={() => setIsMenuOpen(false)} className="block text-gray-400 font-bold">
+                <Link href="/sign-in" prefetch={false} onClick={() => setIsMenuOpen(false)} className="block text-gray-400 font-bold">
                   Sign In
                 </Link>
-                <Link href="/sign-up" onClick={() => setIsMenuOpen(false)}>
+                <Link href="/sign-up" prefetch={false} onClick={() => setIsMenuOpen(false)}>
                   <button className="w-full bg-orange-500 text-black font-black py-4 rounded-xl mt-2">
                     TRY FREE
                   </button>
@@ -119,7 +118,7 @@ export default function Navbar() {
               </SignedOut>
 
               <SignedIn>
-                <Link href="/dashboard" onClick={() => setIsMenuOpen(false)} className="block text-gray-300 font-bold mb-4">
+                <Link href="/dashboard" prefetch={false} onClick={() => setIsMenuOpen(false)} className="block text-gray-300 font-bold mb-4">
                   Dashboard
                 </Link>
                 <div className="flex items-center gap-3 py-2">
