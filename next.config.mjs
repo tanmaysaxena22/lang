@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
+    prefetchOnHover: false, // Disable prefetching on hover for better performance
     serverActions: {
       allowedOrigins: [
         'urban-broccoli-v6rx6pggwpqv2564-3000.app.github.dev', // Add your specific URL here
